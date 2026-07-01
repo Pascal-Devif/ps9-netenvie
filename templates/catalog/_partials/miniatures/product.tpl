@@ -32,29 +32,24 @@
                     <a href="{$product.canonical_url}" class="thumbnail product-thumbnail rc ratio1_1">
                         
                         {if $product.cover}
-                            <img
-                                data-src = "{$product.cover.bySize.pdt_300.url}"
-                                alt = "{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name}{/if}"
-                                data-full-size-image-url = "{$product.cover.bySize.large_default.url}"
-                                width="{$product.cover.bySize.pdt_300.width}"
-                                height="{$product.cover.bySize.pdt_300.height}"
-                                class="lazyload"
-                                >
+                            <img data-src="{if !empty($product.cover.bySize.pdt_360.sources.webp)}{$product.cover.bySize.pdt_360.sources.webp}{else}{$product.cover.bySize.pdt_360.url}{/if}"
+                                alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:30:'...'}{/if}"
+                                data-full-size-image-url="{if !empty($product.cover.bySize.large_default.sources.webp)}{$product.cover.bySize.large_default.sources.webp}{else}{$product.cover.bySize.large_default.url}{/if}"
+                                width="{$product.cover.bySize.pdt_360.width}" height="{$product.cover.bySize.pdt_360.height}"
+                                class="lazyload">
                         {elseif isset($urls.no_picture_image)}
-                            <img class="lazyload" src="{$urls.no_picture_image.bySize.pdt_300.url}">
+                            <img class="lazyload" src="{$urls.no_picture_image.bySize.pdt_360.url}">
                         {else}
-                            <img class="lazyload" src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
+                            <img class="lazyload"
+                                src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
                         {/if}
 
-                        {assign var='productimg' value=Image::getImages($language.id, $product.id)}    
-                        {if isset($productimg[1])}
-                            <img
-                                data-src = "{$link->getImageLink($product.link_rewrite,$product.id_product|cat:"-"|cat:$productimg[1].id_image, 'pdt_300')}"
-                                alt = "{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name}{/if}"
-                                width="{$product.cover.bySize.pdt_300.width}"
-                                height="{$product.cover.bySize.pdt_300.height}"
-                                class="lazyload second-cover"
-                                >
+                        {if isset($product.images[0])}
+                            <img data-src="{if !empty($product.images[0].bySize.pdt_360.sources.webp)}{$product.images[0].bySize.pdt_360.sources.webp}{else}{$product.images[0].bySize.pdt_360.url}{/if}"
+                                alt="{if !empty($product.images[0].legend)}{$product.images[0].legend}{else}{$product.name|truncate:30:'...'}{/if}"
+                                data-full-size-image-url="{if !empty($product.images[0].bySize.large_default.sources.webp)}{$product.images[0].bySize.large_default.sources.webp}{else}{$product.images[0].bySize.large_default.url}{/if}"
+                                width="{$product.images[0].bySize.pdt_360.width}" height="{$product.images[0].bySize.pdt_360.height}"
+                                class="lazyload second-cover">
                         {/if}
 
                     </a>
