@@ -23,15 +23,35 @@
 * International Registered Trademark & Property of PrestaShop SA
 *}
 {block name='product_miniature_item'}
-    <article class="product-miniature js-product-miniature mb-3" id="{$product.link_rewrite}"
-        data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}">
+    <article class="product-miniature js-product-miniature mb-3" id="{$product.link_rewrite}" data-id-product="{$product.id_product}" data-id-product-attribute="{$product.id_product_attribute}">
         <div class="card card-product thumbnail-container">
 
             <div class="card-img-top product__card-img">
 
                 {block name='product_thumbnail'}
                     <a href="{$product.canonical_url}" class="thumbnail product-thumbnail rc ratio1_1">
-                        {include file='catalog/_partials/miniatures/product-image.tpl'}
+                        
+                        {if $product.cover}
+                            <img data-src="{if !empty($product.cover.bySize.pdt_360.sources.webp)}{$product.cover.bySize.pdt_360.sources.webp}{else}{$product.cover.bySize.pdt_360.url}{/if}"
+                                alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:30:'...'}{/if}"
+                                data-full-size-image-url="{if !empty($product.cover.bySize.large_default.sources.webp)}{$product.cover.bySize.large_default.sources.webp}{else}{$product.cover.bySize.large_default.url}{/if}"
+                                width="{$product.cover.bySize.pdt_360.width}" height="{$product.cover.bySize.pdt_360.height}"
+                                class="lazyload">
+                        {elseif isset($urls.no_picture_image)}
+                            <img class="lazyload" src="{$urls.no_picture_image.bySize.pdt_360.url}">
+                        {else}
+                            <img class="lazyload"
+                                src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==">
+                        {/if}
+
+                        {if isset($product.images[0])}
+                            <img data-src="{if !empty($product.images[0].bySize.pdt_360.sources.webp)}{$product.images[0].bySize.pdt_360.sources.webp}{else}{$product.images[0].bySize.pdt_360.url}{/if}"
+                                alt="{if !empty($product.images[0].legend)}{$product.images[0].legend}{else}{$product.name|truncate:30:'...'}{/if}"
+                                data-full-size-image-url="{if !empty($product.images[0].bySize.large_default.sources.webp)}{$product.images[0].bySize.large_default.sources.webp}{else}{$product.images[0].bySize.large_default.url}{/if}"
+                                width="{$product.images[0].bySize.pdt_360.width}" height="{$product.images[0].bySize.pdt_360.height}"
+                                class="lazyload second-cover">
+                        {/if}
+
                     </a>
                 {/block}
             </div>
@@ -42,15 +62,15 @@
                     {block name='product_name'}
                         {if in_array($page.page_name, ['best-sales','category','manufacturer','new-products','prices-drop','product-list','search','supplier'])}
                             <h2 class="h3 product-title"><a href="{$product.canonical_url}">{$product.name}</a></h2>
-                        {else}
+                            {else}
                             <p class="h3 product-title"><a href="{$product.canonical_url}">{$product.name}</a></p>
-                        {/if}
-                    {/block}
-                    {block name='product_reviews'}
-                        {hook h='displayProductListReviews' product=$product}
-                    {/block}
-                    {block name='product_price_and_shipping'}
-                        {if $product.show_price}
+                            {/if}
+                        {/block}
+                        {block name='product_reviews'}
+                            {hook h='displayProductListReviews' product=$product}
+                        {/block}
+                        {block name='product_price_and_shipping'}
+                            {if $product.show_price}
                             <div class="product-price-and-shipping text-center">
                                 {if $product.has_discount}
                                     {hook h='displayProductPriceBlock' product=$product type="old_price"}
@@ -82,14 +102,14 @@
                 <ul class="product-flags">
                     {foreach from=$product.flags item=flag}
                         <li class="product-flag {$flag.type}">{$flag.label}</li>
-                    {/foreach}
-                    {if $product.has_discount}
-                        {if $product.discount_type === 'percentage'}
+                        {/foreach}
+                        {if $product.has_discount}
+                            {if $product.discount_type === 'percentage'}
                             <li class="product-flag discount-percentage discount-product">{$product.discount_percentage}</li>
-                        {elseif $product.discount_type === 'amount'}
+                            {elseif $product.discount_type === 'amount'}
                             <li class="product-flag discount-amount discount-product">{$product.discount_amount_to_display}</li>
+                            {/if}
                         {/if}
-                    {/if}
                 </ul>
             {/block}
         </div>
