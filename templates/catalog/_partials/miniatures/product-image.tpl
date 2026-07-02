@@ -1,38 +1,38 @@
 {block name='product_miniature_image'}
   {if $product.cover}
     <picture>
-      {if isset($product.cover.bySize.default_md.sources.avif)}
+      {if isset($product.cover.bySize.pdt_300.sources.avif)}
         <source
           srcset="
-            {$product.cover.bySize.default_sm.sources.avif} 216w,
-            {$product.cover.bySize.default_md.sources.avif} 261w,
-            {$product.cover.bySize.default_lg.sources.avif} 336w"
+            {$product.cover.bySize.pdt_180.sources.avif} 216w,
+            {$product.cover.bySize.pdt_300.sources.avif} 261w,
+            {$product.cover.bySize.pdt_360.sources.avif} 336w"
           sizes="(min-width: 992px) 25vw, (min-width: 360px) 50vw, 100vw"
           type="image/avif"
         >
       {/if}
 
-      {if isset($product.cover.bySize.default_md.sources.webp)}
+      {if isset($product.cover.bySize.pdt_300.sources.webp)}
         <source
           srcset="
-            {$product.cover.bySize.default_sm.sources.webp} 216w,
-            {$product.cover.bySize.default_md.sources.webp} 261w,
-            {$product.cover.bySize.default_lg.sources.webp} 336w"
+            {$product.cover.bySize.pdt_180.sources.webp} 216w,
+            {$product.cover.bySize.pdt_300.sources.webp} 261w,
+            {$product.cover.bySize.pdt_360.sources.webp} 336w"
           sizes="(min-width: 992px) 25vw, (min-width: 360px) 50vw, 100vw"
           type="image/webp"
         >
       {/if}
 
       <img
-        class="{$componentName}__image"
+        class="lazyload"
         srcset="
-          {$product.cover.bySize.default_sm.url} 216w,
-          {$product.cover.bySize.default_md.url} 261w,
-          {$product.cover.bySize.default_lg.url} 336w"
+          {$product.cover.bySize.pdt_180.url} 216w,
+          {$product.cover.bySize.pdt_300.url} 261w,
+          {$product.cover.bySize.pdt_360.url} 336w"
         sizes="(min-width: 992px) 25vw, (min-width: 360px) 50vw, 100vw"
-        src="{$product.cover.bySize.default_md.url}"
-        width="{$product.cover.bySize.default_md.width}"
-        height="{$product.cover.bySize.default_md.height}"
+        src="{$product.cover.bySize.pdt_300.url}"
+        width="{$product.cover.bySize.pdt_300.width}"
+        height="{$product.cover.bySize.pdt_300.height}"
         loading="lazy"
         alt="{$product.cover.legend}"
         title="{$product.cover.legend}"
@@ -41,38 +41,38 @@
     </picture>
   {else}
     <picture>
-      {if isset($urls.no_picture_image.bySize.default_md.sources.avif)}
+      {if isset($urls.no_picture_image.bySize.pdt_300.sources.avif)}
         <source
           srcset="
-            {$urls.no_picture_image.bySize.default_sm.sources.avif} 216w,
-            {$urls.no_picture_image.bySize.default_md.sources.avif} 261w,
-            {$urls.no_picture_image.bySize.default_lg.sources.avif} 336w"
+            {$urls.no_picture_image.bySize.pdt_180.sources.avif} 216w,
+            {$urls.no_picture_image.bySize.pdt_300.sources.avif} 261w,
+            {$urls.no_picture_image.bySize.pdt_360.sources.avif} 336w"
           sizes="(min-width: 992px) 25vw, (min-width: 360px) 50vw, 100vw"
           type="image/avif"
         >
       {/if}
 
-      {if isset($urls.no_picture_image.bySize.default_md.sources.webp)}
+      {if isset($urls.no_picture_image.bySize.pdt_300.sources.webp)}
         <source
           srcset="
-            {$urls.no_picture_image.bySize.default_sm.sources.webp} 216w,
-            {$urls.no_picture_image.bySize.default_md.sources.webp} 261w,
-            {$urls.no_picture_image.bySize.default_lg.sources.webp} 336w"
+            {$urls.no_picture_image.bySize.pdt_180.sources.webp} 216w,
+            {$urls.no_picture_image.bySize.pdt_300.sources.webp} 261w,
+            {$urls.no_picture_image.bySize.pdt_360.sources.webp} 336w"
           sizes="(min-width: 992px) 25vw, (min-width: 360px) 50vw, 100vw"
           type="image/webp"
         >
       {/if}
 
       <img
-        class="{$componentName}__image"
+        class="lazyload"
         srcset="
-          {$urls.no_picture_image.bySize.default_sm.url} 216w,
-          {$urls.no_picture_image.bySize.default_md.url} 261w,
-          {$urls.no_picture_image.bySize.default_lg.url} 336w"
+          {$urls.no_picture_image.bySize.pdt_180.url} 216w,
+          {$urls.no_picture_image.bySize.pdt_300.url} 261w,
+          {$urls.no_picture_image.bySize.pdt_360.url} 336w"
         sizes="(min-width: 992px) 25vw, (min-width: 360px) 50vw, 100vw"
-        width="{$urls.no_picture_image.bySize.default_md.width}"
-        height="{$urls.no_picture_image.bySize.default_md.height}"
-        src="{$urls.no_picture_image.bySize.default_md.url}"
+        width="{$urls.no_picture_image.bySize.pdt_300.width}"
+        height="{$urls.no_picture_image.bySize.pdt_300.height}"
+        src="{$urls.no_picture_image.bySize.pdt_300.url}"
         loading="lazy"
         alt="{l s='No image available' d='Shop.Theme.Catalog'}"
         title="{l s='No image available' d='Shop.Theme.Catalog'}"
