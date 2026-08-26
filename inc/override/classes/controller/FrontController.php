@@ -23,6 +23,11 @@ class FrontControllerTheme extends FrontControllerCore
         $this->context->smarty->assign('colorForCarac', $colorForCarac);
         */
         parent::init();
+
+        $this->context->smarty->assign(
+            'display_product_tax_label',
+            !empty($this->themeSettings['theme_settings']['display_product_tax_label'])
+        );
     }
     /**
      * Adds jQuery UI component(s) to queued JS file list.

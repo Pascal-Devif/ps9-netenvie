@@ -59,7 +59,8 @@
 
                     <div class="current-price">
                         <span class="current-price-display price{if $product.has_discount} current-price-discount{/if}">{$product.price}</span>
-                        {if $product.unit_price_full}
+                        {include file='_partials/tax-label.tpl'}
+                        {if $product.unit_price_full && $product.unit_price_ratio > 0}
                             <div class="unit-price-cart">{$product.unit_price_full}</div>
                         {/if}
                     </div>

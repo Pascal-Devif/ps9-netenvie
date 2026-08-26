@@ -150,6 +150,7 @@ global_settings:
 
 theme_settings:
   default_layout: layout-full-width
+  display_product_tax_label: 1 # affiche TTC/HT à côté des prix produit
   layouts:
     category: layout-left-column
     best-sales: layout-left-column

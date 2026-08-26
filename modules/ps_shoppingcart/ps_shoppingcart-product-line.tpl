@@ -24,7 +24,7 @@
  *}
 <span class="product-quantity">{$product.quantity}</span>
 <span class="product-name">{$product.name}</span>
-<span class="product-price">{$product.price}</span>
+<span class="product-price">{$product.price} {include file='_partials/tax-label.tpl'}</span>
 <a  class="remove-from-cart"
     rel="nofollow"
     href="{$product.remove_from_cart_url}"

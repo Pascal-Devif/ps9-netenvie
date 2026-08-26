@@ -64,7 +64,7 @@
 
                                 <span class="sr-only">{l s='Price' d='Shop.Theme.Catalog'}</span>
                                 <span class="price{if $product.has_discount} current-price-discount{/if}">{$product.price}</span>
-
+                                {include file='_partials/tax-label.tpl'}
 
                                 {hook h='displayProductPriceBlock' product=$product type='unit_price'}
 

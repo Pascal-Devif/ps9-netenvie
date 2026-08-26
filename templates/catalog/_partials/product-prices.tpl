@@ -39,6 +39,7 @@
 
         <div class="current-price">
           <span class="current-price-display price{if $product.has_discount} current-price-discount{/if}">{$product.price}</span>
+          {include file='_partials/tax-label.tpl'}
           {if $product.has_discount}
             {if $product.discount_type === 'percentage'}
               <span class="discount discount-percentage">{l s='Save %percentage%' d='Shop.Theme.Catalog' sprintf=['%percentage%' => $product.discount_percentage_absolute]}</span>

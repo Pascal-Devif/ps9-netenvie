@@ -46,6 +46,7 @@
         </div>
         <div class="pack-product-price">
           <strong>{$product.price}</strong>
+          {include file='_partials/tax-label.tpl'}
         </div>
         <div class="pack-product-quantity">
           <span>x {$product.pack_quantity}</span>

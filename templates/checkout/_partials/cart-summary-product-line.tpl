@@ -30,7 +30,7 @@
     <div class="product-name">{$product.name}</div>
     <div class="clearfix">
       <span class="product-quantity float-left">x{$product.quantity}</span>
-      <span class="product-price float-right">{$product.price}</span>
+      <span class="product-price float-right">{$product.price} {include file='_partials/tax-label.tpl'}</span>
     </div>
     {hook h='displayProductPriceBlock' product=$product type="unit_price"}
   {foreach from=$product.attributes key="attribute" item="value"}
