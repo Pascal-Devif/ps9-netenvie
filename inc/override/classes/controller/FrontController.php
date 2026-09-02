@@ -10,8 +10,7 @@ class FrontControllerTheme extends FrontControllerCore
 
     public function init()
     {
-        $configurationCacheDirectory = (new Configuration())->get('_PS_CACHE_DIR_');
-        $yamlParser = new YamlParser($configurationCacheDirectory);
+        $yamlParser = new YamlParser(_PS_CACHE_DIR_);
         $this->themeSettings = $yamlParser->parse(_PS_THEME_DIR_ . '/config/theme.yml');
         $this->overrideSettings = $this->themeSettings['override_settings']['class_front_controller'];
         /*
