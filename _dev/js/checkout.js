@@ -49,20 +49,34 @@ import './core';
 
 function setUpCheckout() {
 
-  $('.js-terms a').on('click', (event) => {
+  // Delegate: payment step (and CGV link) is injected via AJAX after personal info / address / delivery
+  $(document).on('click', '.js-terms a', (event) => {
     event.preventDefault();
-    var url = $(event.target).attr('href');
+    const $link = $(event.currentTarget);
+    let url = $link.attr('href');
+
+    const openTermsModal = () => {
+      const $modal = $('#modal');
+      $modal.modal('show');
+      // Colissimo (and others) may replace $.fn.modal with Bootstrap 3,
+      // which toggles `.in` while theme CSS (Bootstrap 4) only reveals with `.show`.
+      $modal.addClass('show').css('display', 'block');
+      $('.modal-backdrop').addClass('show');
+    };
+
     if (url) {
-      // TODO: Handle request if no pretty URL
-      url += `?content_only=1`;
+      url += url.indexOf('?') >= 0 ? '&content_only=1' : '?content_only=1';
       $.get(url, (content) => {
-        $('#modal').find('.js-modal-content').html($(content).find('.page-content--cms').contents());
+        const $cms = $(content).find('.page-content--cms, .page-cms, #content.page-content');
+        const html = $cms.length ? $cms.contents() : content;
+        $('#modal').find('.js-modal-content').html(html);
+        openTermsModal();
       }).fail((resp) => {
         prestashop.emit('handleError', {eventType: 'clickTerms', resp: resp});
       });
+    } else {
+      openTermsModal();
     }
-
-    $('#modal').modal('show');
   });
 
   $('.js-gift-checkbox').on('click', (event) => {
@@ -99,9 +113,37 @@ $(document).on('change','.js-input-delivery:checked', (event) => {
 });
 
 $(document).on('click','.js-checkout-step-header', (event) => {
-    let stepIdentifier = $(event.currentTarget).data('identifier');
-    $('#'+stepIdentifier).addClass('-current');
-    $('#content-'+stepIdentifier).collapse('show').scrollTop();
+    // Prefer section id: template has no data-identifier; Colissimo replaces
+    // Bootstrap 4 collapse with BS3 which toggles `.in` while theme CSS needs `.show`.
+    const $header = $(event.currentTarget);
+    const $step = $header.closest('.checkout-step');
+    const stepId = $step.attr('id');
+    if (!stepId) {
+      return;
+    }
+    const $content = $(`#content-${stepId}`);
+    $step.addClass('-current');
+    // Close sibling step panels (mix of BS3 `.in` and BS4 `.show`)
+    $('#js-checkout-process > .checkout-step > .collapse')
+      .not($content)
+      .removeClass('show in')
+      .css('height', '')
+      .css('display', 'none');
+    $content.addClass('show in').css('display', 'block').css('height', '');
+    $header.attr('aria-expanded', 'true');
+});
+
+// Keep `.show` in sync when Bootstrap (3 or 4) collapse API fires
+$(document).on('show.bs.collapse', '#js-checkout-process > .checkout-step > .collapse', (event) => {
+    const $content = $(event.target);
+    $('#js-checkout-process > .checkout-step > .collapse')
+      .not($content)
+      .removeClass('show in')
+      .css('display', 'none');
+    $content.addClass('show');
+});
+$(document).on('hide.bs.collapse', '#js-checkout-process > .checkout-step > .collapse', (event) => {
+    $(event.target).removeClass('show');
 });
 
 

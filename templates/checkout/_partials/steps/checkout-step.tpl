@@ -32,7 +32,7 @@
                         'js-current-step' => $step_is_current
                     ]|classnames} card"
               >
-        <div class="card-header js-checkout-step-header" id="heading-{$identifier}" data-toggle="collapse" data-target="#content-{$identifier}" aria-expanded="{if $step_is_current}true{else}false{/if}" aria-controls="content-{$identifier}">
+        <div class="card-header js-checkout-step-header" id="heading-{$identifier}" data-identifier="{$identifier}" data-toggle="collapse" data-target="#content-{$identifier}" aria-expanded="{if $step_is_current}true{else}false{/if}" aria-controls="content-{$identifier}">
             <h1 class="step-title h3">
                 <i class="material-icons rtl-no-flip done text-success">&#xE876;</i>
                 <span class="step-number">{$position}</span>

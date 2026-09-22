@@ -86,8 +86,6 @@
     <div class="tax-shipping-delivery-label">
         {if !$configuration.taxes_enabled}
             {l s='No tax' d='Shop.Theme.Catalog'}
-        {elseif $configuration.display_taxes_label}
-            {$product.labels.tax_long}
         {/if}
       {hook h='displayProductPriceBlock' product=$product type="price"}
       {hook h='displayProductPriceBlock' product=$product type="after_price"}

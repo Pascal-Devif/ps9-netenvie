@@ -332,3 +332,24 @@ body.lang-it .payment-options .paypal.js-additional-information .alert.alert-inf
     background-color: lighten($secondary, 15%);
     /* Secondary lighten 15% */
 }
+
+/* Colissimo loads Bootstrap 3 modal JS (`.in`); theme CSS is Bootstrap 4 (`.show` / `.fade:not(.show)`). */
+body#checkout #modal.fade.in,
+body#checkout #modal.fade.show {
+    opacity: 1 !important;
+}
+
+body#checkout #modal.in .modal-dialog,
+body#checkout #modal.show .modal-dialog {
+    transform: none;
+}
+
+body#checkout .modal-backdrop.fade.in,
+body#checkout .modal-backdrop.fade.show {
+    opacity: 0.5 !important;
+}
+
+/* Same conflict for checkout accordion steps (BS3 `.in` vs BS4 `.show`). */
+body#checkout .collapse.in {
+    display: block;
+}
