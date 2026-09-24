@@ -1,11 +1,11 @@
 {**
  * Libellé taxe court (TTC/HT) pour totaux panier.
- * Si aucune taxe n'est appliquée au panier, force HT même pour un groupe TTC.
+ * Compare les totaux réellement calculés (pas le groupe client ni product.rate).
  *}
 {strip}
-  {if isset($cart.subtotals.tax.amount) && $cart.subtotals.tax.amount|floatval == 0}
+  {if isset($cart.totals.total_including_tax.amount) && isset($cart.totals.total_excluding_tax.amount) && $cart.totals.total_including_tax.amount|floatval == $cart.totals.total_excluding_tax.amount|floatval}
     {l s='(tax excl.)' d='Shop.Theme.Global'}
-  {elseif isset($cart.totals.total_including_tax.amount) && isset($cart.totals.total_excluding_tax.amount) && $cart.totals.total_including_tax.amount|floatval == $cart.totals.total_excluding_tax.amount|floatval}
+  {elseif isset($cart.subtotals.tax.amount) && $cart.subtotals.tax.amount|floatval == 0}
     {l s='(tax excl.)' d='Shop.Theme.Global'}
   {elseif isset($cart.labels.tax_short) && $cart.labels.tax_short}
     {$cart.labels.tax_short}
