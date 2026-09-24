@@ -123,10 +123,10 @@
                 {/if}
               {/foreach}
                 {if !$configuration.display_prices_tax_incl && $configuration.taxes_enabled}
-                  <p class="d--flex-between"><span>{$cart.totals.total.label}&nbsp;{$cart.labels.tax_short}</span>&nbsp;<span>{$cart.totals.total.value}</span></p>
+                  <p class="d--flex-between"><span>{$cart.totals.total.label}&nbsp;{include file='_partials/cart-tax-label-short.tpl'}</span>&nbsp;<span>{$cart.totals.total.value}</span></p>
                   <p class="product-total d--flex-between"><span>{$cart.totals.total_including_tax.label}</span>&nbsp;<span class="value">{$cart.totals.total_including_tax.value}</span></p>
                 {else}
-                  <p class="product-total d--flex-between"><span>{$cart.totals.total.label}&nbsp;{if $configuration.taxes_enabled}{$cart.labels.tax_short}{/if}</span>&nbsp;<span class="value">{$cart.totals.total.value}</span></p>
+                  <p class="product-total d--flex-between"><span>{$cart.totals.total.label}&nbsp;{if $configuration.taxes_enabled}{include file='_partials/cart-tax-label-short.tpl'}{/if}</span>&nbsp;<span class="value">{$cart.totals.total.value}</span></p>
                 {/if}
             </div>
           </div>
